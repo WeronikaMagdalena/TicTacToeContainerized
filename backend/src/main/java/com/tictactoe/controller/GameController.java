@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.tictactoe.model.Board;
+import com.tictactoe.model.Game;
 import com.tictactoe.service.GameService;
 
 @RestController
@@ -22,7 +22,7 @@ public class GameController {
     }
 
     @PostMapping("/play")
-    public ResponseEntity<Board> play(@RequestParam Integer tileNumber) {
+    public ResponseEntity<Game> play(@RequestParam Integer tileNumber) {
         log.info("Clicked tile: {}", tileNumber);
         return ResponseEntity.ok(gameService.makeMove(tileNumber));
     }

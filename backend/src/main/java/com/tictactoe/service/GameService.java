@@ -2,16 +2,15 @@ package com.tictactoe.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import com.tictactoe.model.Board;
+import com.tictactoe.model.Game;
 
 @Slf4j
 @Service
 public class GameService {
-    Board boardState = new Board();
+    Game game = new Game();
     private static final Character PLAYER_X = 'X';
     private static final Character PLAYER_O = 'O';
     Character turn = PLAYER_X;
-    Boolean game = true;
     private static final Integer[][] WINNING_COMBINATIONS = {
             // Rows
             {0, 1, 2},
@@ -27,14 +26,13 @@ public class GameService {
     };
 
     public void start() {
-        game = true;
-        boardState = new Board();
+        game = new Game();
     }
 
-    public Board makeMove(Integer tileNumber) {
-        if (!game)
-            return boardState;
-        Character[] board = boardState.getBoard();
+    public Game makeMove(Integer tileNumber) {
+        if (game.getGameOver())
+            return game;
+        Character[] board = game.getBoard();
         if (board[tileNumber] == null) {
             if (turn == PLAYER_X) {
                 board[tileNumber] = PLAYER_X;
@@ -44,26 +42,35 @@ public class GameService {
                 turn = PLAYER_X;
             }
         }
-        Character winner = checkWinner();
-        if (winner != null) {
-            log.info("Player {} wins!", winner);
-            game = false;
-        }
-        return boardState;
+        checkWinner();
+        isTie();
+        return game;
     }
 
-    public Character checkWinner() {
-        Character winner = null;
-        Character[] board = boardState.getBoard();
+    public void checkWinner() {
+        Character[] board = game.getBoard();
         for (Integer[] combination : WINNING_COMBINATIONS) {
             if (board[combination[0]] != null &&
                     board[combination[0]] == board[combination[1]] &&
                     board[combination[0]] == board[combination[2]]) {
-                winner = board[combination[0]];
-                break;
+                Character winner = board[combination[0]];
+                log.info("Player {} wins!", winner);
+                game.setWinner(winner);
+                game.setGameOver(true);
+                return;
             }
         }
-        return winner;
+    }
+
+    public Boolean isTie() {
+        Character[] board = game.getBoard();
+        for (Character tile : board) {
+            if (tile == null) {
+                return false;
+            }
+        }
+        game.setGameOver(true);
+        return true;
     }
 
 }
