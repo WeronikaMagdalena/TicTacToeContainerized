@@ -15,6 +15,23 @@ public class GameController {
 
     private final GameService gameService;
 
+    @PostMapping("/playername")
+    public ResponseEntity<Void> addName(@RequestParam String playerName) {
+        log.info("Player name: {}", playerName);
+        gameService.saveName(playerName);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/players")
+    public String[] getName() {
+        return gameService.getPlayerNames();
+    }
+
+    @PostMapping("/reset")
+    public void resetPlayerNames() {
+        gameService.resetPlayerNames();
+    }
+
     @PostMapping("/start")
     public ResponseEntity<Void> start() {
         gameService.start();

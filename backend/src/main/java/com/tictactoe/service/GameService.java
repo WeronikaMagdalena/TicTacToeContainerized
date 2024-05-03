@@ -29,6 +29,25 @@ public class GameService {
         game = new Game();
     }
 
+    public void saveName(String playerName) {
+        if (game.getPlayer1() == null) {
+            game.setPlayer1(playerName);
+        } else if (game.getPlayer2() == null) {
+            game.setPlayer2(playerName);
+        } else {
+            log.info("Game full.");
+        }
+    }
+
+    public String[] getPlayerNames() {
+        return new String[] {game.getPlayer1(), game.getPlayer2()};
+    }
+
+    public void resetPlayerNames() {
+        game.setPlayer1(null);
+        game.setPlayer2(null);
+    }
+
     public Game makeMove(Integer tileNumber) {
         if (game.getGameOver())
             return game;
