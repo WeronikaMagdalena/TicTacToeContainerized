@@ -1,10 +1,7 @@
-FROM python:3.10-alpine
+FROM amazoncorretto:21
 
-WORKDIR /app
+WORKDIR /usr/local/bin
 
-COPY src/ .
+COPY target/tictactoe-0.0.1-SNAPSHOT.jar ./ticTacToe.jar
 
-RUN pip install -r requirements.txt
-
-ENTRYPOINT ["python3"]
-CMD ["app.py"]
+CMD ["java", "-jar", "ticTacToe.jar"]
