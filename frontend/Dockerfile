@@ -7,4 +7,4 @@ WORKDIR /home/stud
 COPY src/ .
 
 ENTRYPOINT ["busybox"]
-CMD ["httpd", "-f", "-v", "-p", "3000"]
+CMD ["httpd", "-f", "-v", "-p", "8081"]
