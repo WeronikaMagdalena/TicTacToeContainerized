@@ -2,6 +2,8 @@ const tiles = document.querySelectorAll(".tile");
 const gameOverArea = document.getElementById("game-over-area");
 const gameOverText = document.getElementById("game-over-text");
 const playAgain = document.getElementById("play-again");
+const playerLeftElement = document.getElementById('player-left');
+const playerRightElement = document.getElementById('player-right');
 
 fetch('http://localhost:8080/game/players')
   .then(response => response.json())
@@ -21,6 +23,7 @@ tiles.forEach((tile) => tile.addEventListener("click", function () {
     .then(data => {
       console.log(data);
       updateBoard(data.board);
+      boardState = data.board;
       if (data.gameOver == true) {
         gameOverArea.className = "visible";
         let text = "Draw!";

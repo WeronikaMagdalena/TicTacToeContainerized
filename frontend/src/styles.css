@@ -86,10 +86,6 @@ h1 {
   border-color: #6a5acd;
 }
 
-.strike {
-  background-color: #8b0000;
-}
-
 #game-over-area {
   text-align: center;
   border: 8px solid #6a5acd;
@@ -113,6 +109,10 @@ button {
   font-size: 1em;
   cursor: pointer;
   transition: background-color 0.3s;
+}
+
+#reset {
+  margin-top: 10px;
 }
 
 button:hover {

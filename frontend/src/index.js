@@ -1,3 +1,21 @@
+document.getElementById("reset").addEventListener("click", function (event) {
+
+  fetch("http://localhost:8080/game/reset", {
+    method: "POST"
+  })
+    .then(response => {
+      if (response.ok) {
+        console.log("Player names reset");
+      } else {
+        console.error("Failed to reset player names");
+      }
+    })
+    .catch(error => {
+      console.error("Error:", error);
+    });
+
+});
+
 document.getElementById("playerForm").addEventListener("submit", function (event) {
 
   const playerName = document.getElementById("playerName").value;
@@ -16,4 +34,5 @@ document.getElementById("playerForm").addEventListener("submit", function (event
     .catch(error => {
       console.error("Error:", error);
     });
+
 });
