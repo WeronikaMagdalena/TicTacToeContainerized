@@ -43,6 +43,8 @@ public class GameService {
         return new String[] {game.getPlayer1(), game.getPlayer2()};
     }
 
+    public Game getGame() {return game;}
+
     public void resetPlayerNames() {
         game.setPlayer1(null);
         game.setPlayer2(null);

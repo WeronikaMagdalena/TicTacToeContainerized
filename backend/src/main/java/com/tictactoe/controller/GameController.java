@@ -27,6 +27,11 @@ public class GameController {
         return gameService.getPlayerNames();
     }
 
+    @GetMapping("/state")
+    public Game getBoardState() {
+        return gameService.getGame();
+    }
+
     @PostMapping("/reset")
     public void resetPlayerNames() {
         gameService.resetPlayerNames();
