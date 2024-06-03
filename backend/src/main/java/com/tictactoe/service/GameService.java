@@ -26,7 +26,7 @@ public class GameService {
     };
 
     public void start() {
-        game = new Game();
+        game.newGame();
     }
 
     public void saveName(String playerName) {
@@ -34,20 +34,11 @@ public class GameService {
             game.setPlayer1(playerName);
         } else if (game.getPlayer2() == null) {
             game.setPlayer2(playerName);
-        } else {
-            log.info("Game full.");
         }
     }
 
-    public String[] getPlayerNames() {
-        return new String[] {game.getPlayer1(), game.getPlayer2()};
-    }
-
-    public Game getGame() {return game;}
-
-    public void resetPlayerNames() {
-        game.setPlayer1(null);
-        game.setPlayer2(null);
+    public Game getGame() {
+        return game;
     }
 
     public Game makeMove(Integer tileNumber) {

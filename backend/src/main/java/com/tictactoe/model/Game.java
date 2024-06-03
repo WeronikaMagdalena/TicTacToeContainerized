@@ -14,4 +14,10 @@ public class Game {
         board = new Character[9];
     }
 
+    public void newGame() {
+        board = new Character[9];
+        winner = null;
+        gameOver = false;
+    }
+
 }

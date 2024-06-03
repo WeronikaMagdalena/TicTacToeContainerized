@@ -22,19 +22,9 @@ public class GameController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/players")
-    public String[] getName() {
-        return gameService.getPlayerNames();
-    }
-
     @GetMapping("/state")
-    public Game getBoardState() {
+    public Game getGameState() {
         return gameService.getGame();
-    }
-
-    @PostMapping("/reset")
-    public void resetPlayerNames() {
-        gameService.resetPlayerNames();
     }
 
     @PostMapping("/start")
